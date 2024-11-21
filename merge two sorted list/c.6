@@ -1,0 +1,42 @@
+class Solution {
+public:
+    char rightOfLeft(char c){
+        if (c == '(')
+            return ')';
+        if (c == '[')
+            return ']';
+        if (c == '{')
+            return '}';
+        else return 'a';
+    }
+    bool isLeft(char c){
+        if (c =='(' || c == '[' || c== '{')
+        {
+            return true;
+        }
+        else return false;
+    }
+    bool isValid(string s) {
+        stack<char> myStack;
+        for (auto c : s)
+        {
+            if (isLeft(c))
+            {
+                myStack.push(c);
+            }
+            else if (myStack.empty())
+            {
+                return false;
+            }
+            else if (rightOfLeft(myStack.top()) == c)
+            {
+                myStack.pop();
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return myStack.empty() ? true : false;
+    }
+};
