@@ -1,0 +1,54 @@
+#define I_val 1
+#define V_val 5
+#define X_val 10
+#define L_val 50
+#define C_val 100
+#define D_val 500
+#define M_val 1000
+
+int romanToInt(char * s){
+	int str_len = strlen(s);
+	char c = NULL;
+	int result = 0;
+	for(int i = 0; i<str_len; i++){
+		c = *(s+i);
+		switch(c){
+			case 'I':
+				result += I_val;
+				break;
+			case 'V':
+				if((i != 0) && (*(s+i-1) == 'I')) 
+					result -= (2*I_val);
+				result += V_val;
+				break;
+			case 'X':
+				if((i != 0) && (*(s+i-1) == 'I')) 
+					result -= (2*I_val);
+				result += X_val;
+				break;
+			case 'L':
+				if((i != 0) && (*(s+i-1) == 'X')) 
+					result -= (2*X_val);
+				result += L_val;
+				break;
+			case 'C':
+				if((i != 0) && (*(s+i-1) == 'X')) 
+					result -= (2*X_val);
+				result += C_val;
+				break;
+			case 'D':
+				if((i != 0) && (*(s+i-1) == 'C')) 
+					result -= (2*C_val);
+				result += D_val;
+				break;
+			case 'M':
+				if((i != 0) && (*(s+i-1) == 'C')) 
+					result -= (2*C_val);
+				result += M_val;
+				break;
+			default:
+				break;
+		}
+	}
+	return result;
+}
