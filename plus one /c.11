@@ -1,0 +1,47 @@
+int* plusOne(int* digits, int digitsSize, int* returnSize){
+
+    int * res = (int *)malloc(sizeof(int) * (digitsSize+1));
+    memset(res,0,sizeof(int) *(digitsSize+1) );
+    
+    int c=0;
+    int i=digitsSize;
+    int p;
+    if (digits[i-1] == 9)
+    {
+        res[i] = 0;
+        c = 1;
+        i--;
+    }
+    else
+    {
+        res[i] = res[i] + digits[i-1] + 1;
+        i--;
+    }
+    
+    while (i > 0)
+    {
+        p = digits[i-1] + c;
+        if (p > 9)
+        {
+            c=1;
+            res[i] = 0;
+        }
+        else
+        {
+            res[i] = p;
+            c=0;
+        }
+        i--;
+    }
+    if (c)
+    {
+        res[i] = 1;
+        *returnSize = digitsSize + 1;
+    }
+    else
+    {
+        *returnSize = digitsSize;
+        i+=1;
+    }
+    return &res[i];
+}
