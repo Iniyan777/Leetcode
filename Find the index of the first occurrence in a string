@@ -1,0 +1,30 @@
+int strStr(char* haystack, char* needle) {
+    //just out of habit, do checking
+    if ((haystack == NULL) || (needle == NULL)) {
+        fprintf(stderr, "1 <= haystack.length, needle.length <= 104");
+        return (-1);
+    }
+    
+    char *haystack_ptr = haystack;
+    char *needle_ptr;
+    char *start_ptr;
+
+    while (*haystack_ptr != '\0') {
+        start_ptr = haystack_ptr; // Save current position in haystack
+        needle_ptr = needle;
+
+        // Compare current segment of haystack with needle
+        while (*needle_ptr != '\0' && *haystack_ptr == *needle_ptr) {
+            haystack_ptr++;
+            needle_ptr++;
+        }
+
+        // If we reached the end of the needle, return the starting index
+        if (*needle_ptr == '\0')
+            return (start_ptr - haystack); // Return the difference (index)
+
+        // Reset haystack pointer to the next char
+        haystack_ptr = start_ptr + 1;
+    }
+    return (-1); // Needle not found :(
+}
